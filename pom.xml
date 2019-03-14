@@ -256,6 +256,11 @@
         <!--<version>3.1.0</version>-->
         <!--<scope>provided</scope>-->
         <!--</dependency>-->
+        <dependency>
+            <groupId>com.soft863</groupId>
+            <artifactId>push-message</artifactId>
+            <version>1.0.1</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -264,7 +269,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <executable>true</executable>
-                    <fork>true</fork>//该配置必须
+                    <fork>true</fork>
                 </configuration>
             </plugin>
         </plugins>
