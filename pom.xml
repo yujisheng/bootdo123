@@ -256,6 +256,16 @@
         <!--<version>3.1.0</version>-->
         <!--<scope>provided</scope>-->
         <!--</dependency>-->
+        <dependency>
+            <groupId>com.soft863</groupId>
+            <artifactId>blsframwork-message</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.soft863</groupId>
+            <artifactId>push-message</artifactId>
+            <version>1.0.2</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -263,8 +273,8 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                    <fork>true</fork><!--该配置必须-->
                     <executable>true</executable>
-                    <fork>true</fork>//该配置必须
                 </configuration>
             </plugin>
         </plugins>

@@ -51,3 +51,25 @@ spring:
         max-active: 100
         # 连接池最大阻塞等待时间（使用负值表示没有限制）
         max-wait: -1
+
+blsf:
+  #基于阿里云的短信发送服务的配置
+  #sendMessage:
+  #设置公钥
+  #accessKeyId:
+  #设置私钥
+  #accessKeySecret:
+  #设置消息发送的模板的编号
+  #templateCode:
+  #设置链接超时间
+  #connectTimeout: 1000
+  #设置读取超时时间
+  #readTimeout: 1000
+  #基于极光推送服务的配置
+  pushMessage:
+    #设置公钥
+    appKey: 5d9a27ae41095e3b0b243984
+    #设置私钥
+    masterSecret: 6cb1c6c5e2779ac0257d8a72
+    #设置开发环境，true为生产环境，false为测试环境
+    production: true
