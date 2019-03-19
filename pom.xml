@@ -257,11 +257,11 @@
         <!--<scope>provided</scope>-->
         <!--</dependency>-->
         <!--基于阿里大于的消息发送-->
-        <dependency>
+        <!--<dependency>
             <groupId>com.soft863</groupId>
             <artifactId>blsframwork-message</artifactId>
             <version>1.0.2</version>
-        </dependency>
+        </dependency>-->
         <!--基于极光推送的消息推送-->
         <dependency>
             <groupId>com.soft863</groupId>

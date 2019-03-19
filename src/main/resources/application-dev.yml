@@ -76,11 +76,11 @@ blsf:
     #邮件发送相关配置
   sendMail:
     #系统默认发送人账号
-    defaultEmail: 1670915265@qq.com
+    email: 1670915265@qq.com
     #系统默认发送人密码
-    defaultPassword: lsozyanivrwtichc
+    password: lsozyanivrwtichc
     #系统默认发送人名称
-    defaultName: 系统
+    name: 系统
     properties:
       # 设置是否需要认证，如果为true,那么用户名和密码就必须的，
       #如果设置false，可以不设置用户名和密码，当然也得看你的对接的平台是否支持无密码进行访问的。

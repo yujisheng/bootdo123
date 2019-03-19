@@ -1,8 +1,6 @@
 package com.bootdo.common.config;
 
-import com.soft863.message.SendMessage;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 
 
 public class SendMessageConfig {
@@ -23,7 +21,7 @@ public class SendMessageConfig {
     private int readTimeout;
 
 
-    @Bean
+    /*@Bean
     public SendMessage sendSmsConfig() {
         SendMessage SendMessage = new SendMessage();
         SendMessage.setAccessKeyId(accessKey);
@@ -32,5 +30,5 @@ public class SendMessageConfig {
         SendMessage.setConnectTimeout(connectTimeout);
         SendMessage.setReadTimeout(readTimeout);
         return SendMessage;
-    }
+    }*/
 }
