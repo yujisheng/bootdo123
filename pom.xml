@@ -256,15 +256,23 @@
         <!--<version>3.1.0</version>-->
         <!--<scope>provided</scope>-->
         <!--</dependency>-->
+        <!--基于阿里大于的消息发送-->
         <dependency>
             <groupId>com.soft863</groupId>
             <artifactId>blsframwork-message</artifactId>
-            <version>1.0.1</version>
+            <version>1.0.2</version>
         </dependency>
+        <!--基于极光推送的消息推送-->
         <dependency>
             <groupId>com.soft863</groupId>
             <artifactId>push-message</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.6</version>
+        </dependency>
+        <!--邮件发送-->
+        <dependency>
+            <groupId>com.soft863</groupId>
+            <artifactId>send-email</artifactId>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
     <build>

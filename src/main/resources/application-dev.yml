@@ -68,8 +68,23 @@ blsf:
   #基于极光推送服务的配置
   pushMessage:
     #设置公钥
-    appKey: 5d9a27ae41095e3b0b243984
+    appKey: ba47f4976d3cfb9e0482a58e
     #设置私钥
-    masterSecret: 6cb1c6c5e2779ac0257d8a72
+    masterSecret: 2e1450220d6addb8808ad8ff
     #设置开发环境，true为生产环境，false为测试环境
     production: true
+    #邮件发送相关配置
+  sendMail:
+    #系统默认发送人账号
+    defaultEmail: 1670915265@qq.com
+    #系统默认发送人密码
+    defaultPassword: lsozyanivrwtichc
+    #系统默认发送人名称
+    defaultName: 系统
+    properties:
+      # 设置是否需要认证，如果为true,那么用户名和密码就必须的，
+      #如果设置false，可以不设置用户名和密码，当然也得看你的对接的平台是否支持无密码进行访问的。
+      mail.smtp.auth: true
+      # STARTTLS[1]  是对纯文本通信协议的扩展。它提供一种方式将纯文本连接升级为加密连接（TLS或SSL），而不是另外使用一个端口作加密通信。
+      mail.smtp.starttls.enable: true
+      mail.smtp.starttls.required: true

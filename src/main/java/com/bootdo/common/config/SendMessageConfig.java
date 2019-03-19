@@ -1,9 +1,8 @@
 package com.bootdo.common.config;
 
-import com.soft863.message.SendMessageMain;
+import com.soft863.message.SendMessage;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 
 public class SendMessageConfig {
@@ -25,13 +24,13 @@ public class SendMessageConfig {
 
 
     @Bean
-    public SendMessageMain sendSmsConfig() {
-        SendMessageMain sendMessageMain = new SendMessageMain();
-        sendMessageMain.setAccessKeyId(accessKey);
-        sendMessageMain.setAccessKeySecret(accessKeySecret);
-        sendMessageMain.setTemplateCode(templateCode);
-        sendMessageMain.setConnectTimeout(connectTimeout);
-        sendMessageMain.setReadTimeout(readTimeout);
-        return sendMessageMain;
+    public SendMessage sendSmsConfig() {
+        SendMessage SendMessage = new SendMessage();
+        SendMessage.setAccessKeyId(accessKey);
+        SendMessage.setAccessKeySecret(accessKeySecret);
+        SendMessage.setTemplateCode(templateCode);
+        SendMessage.setConnectTimeout(connectTimeout);
+        SendMessage.setReadTimeout(readTimeout);
+        return SendMessage;
     }
 }

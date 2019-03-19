@@ -1,6 +1,6 @@
 package com.bootdo.common.config;
 
-import com.soft863.pushmessge.PushMessageMain;
+import com.soft863.pushmessge.PushMessage;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,11 +15,13 @@ public class PushMessageConfig {
     @Value("${blsf.pushMessage.production}")
     private boolean production;
 
-    @Bean
-    public PushMessageMain pushMessageconfig() {
-        PushMessageMain.setAppKey(appKey);
-        PushMessageMain.setMasterSecret(masterSecret);
-        PushMessageMain.setProduction(production);
-        return new PushMessageMain();
+    @Bean(name = "pushMessage")
+    public PushMessage pushMessage() {
+
+        PushMessage pushMessage = new PushMessage();
+        pushMessage.setAppKey(appKey);
+        pushMessage.setMasterSecret(masterSecret);
+        pushMessage.setProduction(production);
+        return pushMessage;
     }
 }
