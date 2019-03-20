@@ -2,10 +2,10 @@ package com.bootdo.testDemo;
 
 import cn.jiguang.common.resp.APIConnectionException;
 import cn.jiguang.common.resp.APIRequestException;
-import com.soft863.pushmessge.PushMessage;
-import com.soft863.pushmessge.domain.AllMessage;
-import com.soft863.pushmessge.domain.AndroidMessage;
-import com.soft863.pushmessge.domain.IosMessage;
+import com.soft863.framework.PushMessage;
+import com.soft863.framework.PushMessageConfig.AllMessage;
+import com.soft863.framework.PushMessageConfig.AndroidMessage;
+import com.soft863.framework.PushMessageConfig.IosMessage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

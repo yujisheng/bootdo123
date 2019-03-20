@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableAutoConfiguration(exclude = {
@@ -28,4 +27,6 @@ public class BootdoApplication {
                 " _| |__) || \\__. || \\__. || |, _| |_.' /| \\__. | \n" +
                 "|_______/  '.__.'  '.__.' \\__/|______.'  '.__.'  ");
     }
+
+
 }

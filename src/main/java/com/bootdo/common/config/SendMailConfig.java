@@ -1,15 +1,11 @@
 package com.bootdo.common.config;
 
-import com.soft863.sendmail.config.MailInfo;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
 /**
  * @ClassName: SendMailConfig
  * @Author
  * @Date 2019/3/19 0019 17:11
  */
-@Configuration
+
 public class SendMailConfig {
 
     private String email;
@@ -24,7 +20,7 @@ public class SendMailConfig {
 
     private boolean starttlsRequired;
 
-    @Bean
+   /* @Bean
     public MailInfo sendMail() {
         MailInfo mailInfo = new MailInfo();
         mailInfo.setEmail(email);
@@ -34,5 +30,5 @@ public class SendMailConfig {
         mailInfo.setStarttlsEnable(starttlsEnable);
         mailInfo.setStarttlsRequired(starttlsRequired);
         return mailInfo;
-    }
+    }*/
 }

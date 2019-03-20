@@ -1,6 +1,8 @@
 package com.bootdo.testDemo;
 
+import com.soft863.framework.Mail;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -15,6 +17,7 @@ public class SendMessageTest {
 
    /* @Autowired
     private SendMessage sendMessage;
+
 
     @Test
     public void sendSmsTest() {
@@ -37,5 +40,14 @@ public class SendMessageTest {
         }
 
     }*/
+
+   @Autowired
+   private Mail mail;
+
+   /*@Test
+   public void mmm(){
+       Mail mail = new Mail();
+       System.out.println(mail.sayHello());
+   }*/
 
 }
