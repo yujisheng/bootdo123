@@ -28,6 +28,11 @@ public class BlogController {
         return "blog/index/main";
     }
 
+    @GetMapping("/push")
+    String push() {
+        return "plugin/push/push";
+    }
+
     @ResponseBody
     @GetMapping("/open/list")
     public PageUtils opentList(@RequestParam Map<String, Object> params) {

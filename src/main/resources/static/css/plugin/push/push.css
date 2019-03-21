@@ -1,0 +1,15 @@
+#push-message {
+    width: 80%;
+    height: auto;
+    border: black 1px solid;
+    align-content: center;
+    padding: 100px auto;
+}
+
+#push-content {
+    height: 10%;
+}
+
+#push-object {
+    height: 80%;
+}

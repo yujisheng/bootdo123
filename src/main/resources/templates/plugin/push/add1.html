@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<!--<head th:include="system/user/include :: header"></head>-->
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="ibox">
+                <div class="ibox-title" style="padding-bottom: 0;">
+                    <h3 class="text-center">邮件发送</h3>
+                    <div class="gg-nav">
+
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#basic_info" data-toggle="tab">苹果(ios)</a></li>
+                            <li><a href="#photo_info" data-toggle="tab">安卓(Android)</a></li>
+                            <!--<li><a href="#pwd_info" data-toggle="tab">修改密码</a></li>-->
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="tab-content">
+                    <!--apple(ios) info-->
+                    <div class="ibox-content tab-pane fade in active" id="basic_info">
+
+                        <form class="gg-form" role="form" id="basicInfoForm-ios">
+                            <div class="gg-formGroup">
+                                <div class="gg-formTitle">
+                                    <em class="gg-star"></em>
+                                    <span>目标人群:</span>
+                                </div>
+                                <div class="gg-formDetail">
+                                    <div class="radio i-checks">
+                                        <label class="radio-inline">
+                                            <div class="gg-nav">
+                                                <ul class="nav nav-tabs">
+                                                    <li class="active">
+                                                        <a href="#push_all" data-toggle="tab">广播(所有人)</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#push_tag" data-toggle="tab">设备标签(tag)</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#push_alias" data-toggle="tab">设备别名(alias)</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="ibox-content tab-pane fade gg" id="push_tag">
+                                                <input type="text" name="" value="添加标签，中间用分号隔开">
+                                            </div>
+                                            <div class="ibox-content tab-pane fade gg" id="push_alias">
+                                                <input type="text" name="" value="添加别名，中间用分号隔开">
+                                            </div>
+                                            <input type="radio" name="123456" value="1" checked/>广播(所有人)<br/>
+                                            <input type="radio" name="123456" value="2"/>设备名称(tag)<br/>
+                                            <input type="radio" name="123456" value="3"/>设备别名(alias)<br/>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="gg-formGroup">
+                                <div class="gg-formTitle">
+                                    <em class="gg-star"></em>
+                                    <span>消息推送:</span>
+                                </div>
+                                <div class="gg-formDetail">
+                                    <textarea rows="5" cols="80" name=""></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!--android_info-->
+                    <div class="ibox-content tab-pane fade gg" id="photo_info">
+                        <form class="gg-form" role="form" id="basicInfoForm-android">
+                            <div class="gg-formGroup">
+                                <div class="gg-formTitle">
+                                    <em class="gg-star"></em>
+                                    <span>目标人群:</span>
+                                </div>
+                                <div class="gg-formDetail">
+                                    <div class="radio i-checks">
+                                        <label class="radio-inline">
+                                            <input type="radio" name="123456" value="1" checked/>广播(所有人)<br/>
+                                            <input type="radio" name="123456" value="2"/>设备名称(tag)<br/>
+                                            <input type="radio" name="123456" value="3"/>设备别名(alias)<br/>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="gg-formGroup">
+                                <div class="gg-formTitle">
+                                    <em class="gg-star"></em>
+                                    <span>消息推送:</span>
+                                </div>
+                                <div class="gg-formDetail">
+                                    <textarea rows="5" cols="80" name=""></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="gg-btnGroup">
+                        <button type="button" class="btn btn-sm btn-primary" id="base_save">保存</button>
+                        <button type="button" class="btn btn-sm btn-primary" id="base_push">立即发送</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div th:include="system/user/include :: footer"></div>-->
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/push/add1.js"></script>
+</body>
+</html>

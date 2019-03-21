@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.soft863.framework.push.dao.PushDao">
+
+    <select id="get" resultType="com.soft863.framework.push.domain.PushDO">
+		select `push_id`,`message_id`,`platfrom`,`result`,`status`,`audience`,`alter`,`extra`,`title`,`message` from push where push_id = #{value}
+	</select>
+
+    <select id="list" resultType="com.soft863.framework.push.domain.PushDO">
+        select `push_id`,`message_id`,`platfrom`,`result`,`status`,`audience`,`alter`,`extra`,`title`,`message` from
+        push
+        <where>
+            <if test="pushId != null and pushId != ''">and push_id =
+                #{pushId}
+            </if>
+            <if test="messageId != null and messageId != ''">and message_id =
+                #{messageId}
+            </if>
+            <if test="platfrom != null and platfrom != ''">and platfrom =
+                #{platfrom}
+            </if>
+            <if test="result != null and result != ''">and result =
+                #{result}
+            </if>
+            <if test="status != null and status != ''">and status =
+                #{status}
+            </if>
+            <if test="audience != null and audience != ''">and audience =
+                #{audience}
+            </if>
+            <if test="alter != null and alter != ''">and alter =
+                #{alter}
+            </if>
+            <if test="extra != null and extra != ''">and extra =
+                #{extra}
+            </if>
+            <if test="title != null and title != ''">and title =
+                #{title}
+            </if>
+            <if test="message != null and message != ''">and message =
+                #{message}
+            </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by push_id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from push
+        <where>
+            <if test="pushId != null and pushId != ''">and push_id =
+                #{pushId}
+            </if>
+            <if test="messageId != null and messageId != ''">and message_id =
+                #{messageId}
+            </if>
+            <if test="platfrom != null and platfrom != ''">and platfrom =
+                #{platfrom}
+            </if>
+            <if test="result != null and result != ''">and result =
+                #{result}
+            </if>
+            <if test="status != null and status != ''">and status =
+                #{status}
+            </if>
+            <if test="audience != null and audience != ''">and audience =
+                #{audience}
+            </if>
+            <if test="alter != null and alter != ''">and alter =
+                #{alter}
+            </if>
+            <if test="extra != null and extra != ''">and extra =
+                #{extra}
+            </if>
+            <if test="title != null and title != ''">and title =
+                #{title}
+            </if>
+            <if test="message != null and message != ''">and message =
+                #{message}
+            </if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.soft863.framework.push.domain.PushDO">
+		insert into push
+		(
+                    			`message_id`, 
+                    			`platfrom`, 
+                    			`result`, 
+                    			`status`, 
+                    			`audience`, 
+                    			`alter`, 
+                    			`extra`, 
+                    			`title`, 
+                    			`message`
+            		)
+		values
+		(
+                    			#{messageId}, 
+                    			#{platfrom}, 
+                    			#{result}, 
+                    			#{status}, 
+                    			#{audience}, 
+                    			#{alter}, 
+                    			#{extra}, 
+                    			#{title}, 
+                    			#{message}
+            		)
+	</insert>
+
+    <update id="update" parameterType="com.soft863.framework.push.domain.PushDO">
+        update push
+        <set>
+            <if test="messageId != null">`message_id` = #{messageId
+                        },
+            </if>
+            <if test="platfrom != null">`platfrom` = #{platfrom
+                        },
+            </if>
+            <if test="result != null">`result` = #{result
+                        },
+            </if>
+            <if test="status != null">`status` = #{status
+                        },
+            </if>
+            <if test="audience != null">`audience` = #{audience
+                        },
+            </if>
+            <if test="alter != null">`alter` = #{alter
+                        },
+            </if>
+            <if test="extra != null">`extra` = #{extra
+                        },
+            </if>
+            <if test="title != null">`title` = #{title
+                        },
+            </if>
+            <if test="message != null">`message` = #{message
+                        }
+            </if>
+        </set>
+        where push_id = #{pushId}
+    </update>
+
+    <delete id="remove">
+		delete from push where push_id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from push where push_id in
+        <foreach item="pushId" collection="array" open="(" separator="," close=")">
+            #{pushId}
+        </foreach>
+    </delete>
+
+</mapper>

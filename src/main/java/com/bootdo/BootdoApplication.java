@@ -6,14 +6,16 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableAutoConfiguration(exclude = {
         org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class
 })
 @EnableTransactionManagement
-@ServletComponentScan
-@MapperScan("com.bootdo.*.dao")
+@ComponentScan({"com.soft863", "com.bootdo"})
+@ServletComponentScan({"com.soft863", "com.bootdo"})
+@MapperScan({"com.bootdo.*.dao", "com.soft863.framework.*.dao"})
 @SpringBootApplication
 @EnableCaching
 public class BootdoApplication {
