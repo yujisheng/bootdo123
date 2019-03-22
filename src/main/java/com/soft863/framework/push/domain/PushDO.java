@@ -171,4 +171,20 @@ public class PushDO implements Serializable {
     public String getMessage() {
         return message;
     }
+
+    @Override
+    public String toString() {
+        return "PushDO{" +
+                "pushId=" + pushId +
+                ", messageId=" + messageId +
+                ", platfrom='" + platfrom + '\'' +
+                ", result=" + result +
+                ", status=" + status +
+                ", audience='" + audience + '\'' +
+                ", alter='" + alter + '\'' +
+                ", extra='" + extra + '\'' +
+                ", title='" + title + '\'' +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }

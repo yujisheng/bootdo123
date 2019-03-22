@@ -1,8 +1,14 @@
 package com.soft863.framework.push.controller;
 
+import cn.jiguang.common.resp.APIConnectionException;
+import cn.jiguang.common.resp.APIRequestException;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
+import com.soft863.framework.PushMessage;
+import com.soft863.framework.PushMessageConfig.AllMessage;
+import com.soft863.framework.PushMessageConfig.AndroidMessage;
+import com.soft863.framework.PushMessageConfig.IosMessage;
 import com.soft863.framework.push.domain.PushDO;
 import com.soft863.framework.push.service.PushService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +16,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -117,5 +125,101 @@ public class PushController {
         pushService.batchRemove(pushIds);
         return R.ok();
     }
+
+    @Autowired
+    private PushMessage pushMessage;
+
+    @RequestMapping("/pushMessageToAndroidAll")
+    @ResponseBody
+    public R pushMessageToAndroidAll(PushDO pushDO) throws APIConnectionException, APIRequestException {
+        pushService.save(pushDO);
+        Map<String, String> extras = new HashMap<String, String>();
+        extras.put("extraKey", "ectraValue");
+        AndroidMessage androidMessage = new AndroidMessage(pushDO.getAlter(), pushDO.getTitle(), pushDO.getMessage(), extras);
+        // 测试
+        int i = pushMessage.pushMessageToAndroidAll(androidMessage);
+        if (i > 0) {
+            return R.ok();
+        }
+        return R.error();
+    }
+
+    @RequestMapping("/pushMessageToAndroidByTag")
+    @ResponseBody
+    public R pushMessageToAndroidByTag() throws APIConnectionException, APIRequestException {
+        List<String> tags = new ArrayList<String>();
+        tags.add("Android_tag1");
+        tags.add("Android_tag2");
+        tags.add("Android_tag3");
+        Map<String, String> extras = new HashMap<String, String>();
+        extras.put("extraKey", "ectraValue");
+        AndroidMessage androidMessage = new AndroidMessage(tags, "测试qpushMessageAndroidByTags", "测试主题", "测试内容", extras);
+        // 测试
+        int i = pushMessage.pushMessageToAndroidByTags(androidMessage);
+        if (i > 0) {
+            return R.ok();
+        }
+        return R.error();
+    }
+
+    @RequestMapping("/pushMessageToAndroidByAlias")
+    @ResponseBody
+    public R pushMessageToAndroidByalias() throws APIConnectionException, APIRequestException {
+        List<String> alias = new ArrayList<String>();
+        alias.add("ansroid_alias1");
+        alias.add("ansroid_alias2");
+        alias.add("ansroid_alias3");
+        Map<String, String> extras = new HashMap<String, String>();
+        extras.put("extraKey", "ectraValue");
+        AndroidMessage androidMessage = new AndroidMessage(alias, "测试pushMessageAndroidByAlias", "测试主题", "测试内容", extras);
+        // 测试
+        int i = pushMessage.pushMessageToAndroidByAlias(androidMessage);
+        if (i > 0) {
+            return R.ok();
+        }
+        return R.error();
+    }
+
+    @RequestMapping("/pushMessageIosByTags")
+    @ResponseBody
+    public R pushMessageIosByTags() throws APIConnectionException, APIRequestException {
+        List<String> tags = new ArrayList<String>();
+        tags.add("Ios_tag1");
+        tags.add("Ios_tag2");
+        tags.add("Ios_tag3");
+        IosMessage iosMessage = new IosMessage(tags, "测试pushMessageToIOsAll", "消息内容", "extraKey", "extraValue");
+        // 测试
+        int i = pushMessage.pushMessageToIosByTags(iosMessage);
+        if (i > 0) {
+            return R.ok();
+        }
+        return R.error();
+    }
+
+    @RequestMapping("/pushMessageToIosAll")
+    @ResponseBody
+    public R pushMessageToIosAll(PushDO pushDO) throws APIConnectionException, APIRequestException {
+        pushService.save(pushDO);
+        IosMessage iosMessage = new IosMessage(pushDO.getAlter(), pushDO.getMessage(), "extraKey", "extraValue");
+        // 测试
+        int i = pushMessage.pushMessageToIosAll(iosMessage);
+        if (i > 0) {
+            return R.ok();
+        }
+        return R.error();
+    }
+
+    @RequestMapping("/pushMessage")
+    @ResponseBody
+    public R pushMessage() throws APIConnectionException, APIRequestException {
+        AllMessage allMessage = new AllMessage("测试pushMessageAndroidAndIosAll", "消息内容", "extraLey", "extraValue");
+        // 测试
+        int i = pushMessage.pushMessageAndroidAndIosAll(allMessage);
+        if (i > 0) {
+            return R.ok();
+        }
+        return R.error();
+    }
+
 
 }

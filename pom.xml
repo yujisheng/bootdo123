@@ -271,18 +271,13 @@
         <dependency>
             <groupId>com.soft863</groupId>
             <artifactId>bls-application-push</artifactId>
-            <version>1.0.7</version>
+            <version>1.0.0</version>
         </dependency>
         <!--邮件发送-->
-        <!--<dependency>
-            <groupId>com.soft863</groupId>
-            <artifactId>send-mail</artifactId>
-            <version>1.0.1</version>
-        </dependency>-->
         <dependency>
             <groupId>com.soft863.framework</groupId>
             <artifactId>bls-application-mail</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
     <build>

@@ -46,38 +46,46 @@ function load() {
                     {
                         checkbox: true
                     },
-                    {
+                    /*{
                         field: 'pushId',
                         title: '消息推送编号'
-                    },
-                    {
+                    },*/
+                    /*{
                         field: 'messageId',
                         title: '消息编号'
-                    },
+                    },*/
                     {
                         field: 'platfrom',
-                        title: '推送平台啊'
+                        title: '推送平台'
                     },
-                    {
+                    /*{
                         field: 'result',
                         title: '推送结果'
-                    },
+                    },*/
                     {
                         field: 'status',
-                        title: '推送状态'
+                        title: '推送状态',
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            if (row.status == 1) {
+                                return "已发送";
+                            } else {
+                                return "未发送";
+                            }
+                        }
                     },
-                    {
+                    /*{
                         field: 'audience',
                         title: '推送人群'
-                    },
+                    },*/
                     {
                         field: 'alter',
                         title: '推送通知'
                     },
-                    {
+                    /*{
                         field: 'extra',
                         title: '推送额外信息'
-                    },
+                    },*/
                     {
                         field: 'title',
                         title: '推送主题'
@@ -97,10 +105,13 @@ function load() {
                             var d = '<a class="btn btn-warning btn-sm ' + s_remove_h + '" href="#" title="删除"  mce_href="#" onclick="remove(\''
                                 + row.pushId
                                 + '\')"><i class="fa fa-remove"></i></a> ';
-                            var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
+                            var f = '<a class="btn btn-success btn-sm ' + s_resetPwd_h + '"href="#" title="发送"  mce_href="#" onclick="push_Message(\''
                                 + row.pushId
                                 + '\')"><i class="fa fa-key"></i></a> ';
-                            return e + d;
+                            if (row.status == 1) {
+                                return e + d;
+                            }
+                            return e + d + f;
                         }
                     }]
             });
@@ -154,7 +165,15 @@ function remove(id) {
     })
 }
 
-function resetPwd(id) {
+function push_Message(id) {
+    /*layer.open({
+        type: 2,
+        title: '增加',
+        maxmin: true,
+        shadeClose: false, // 点击遮罩关闭层
+        area: ['800px', '520px'],
+        content: prefix + '/push/'  + id // iframe的url
+    });*/
 }
 
 function batchRemove() {

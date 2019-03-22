@@ -32,6 +32,7 @@ public class PushServiceImpl implements PushService {
 
     @Override
     public int save(PushDO push) {
+        push.setStatus(0L);
         return pushDao.save(push);
     }
 
