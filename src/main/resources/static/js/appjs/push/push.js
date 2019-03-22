@@ -165,15 +165,24 @@ function remove(id) {
     })
 }
 
-function push_Message(id) {
-    /*layer.open({
-        type: 2,
-        title: '增加',
-        maxmin: true,
-        shadeClose: false, // 点击遮罩关闭层
-        area: ['800px', '520px'],
-        content: prefix + '/push/'  + id // iframe的url
-    });*/
+function push_Message() {
+    $.ajax({
+        cache: true,
+        type: "POST",
+        url: "/plugin/push/pushMessageToAndroidAll",
+        data: $('#basicInfoForm-android').serialize(),
+        async: false,
+        error: function (request) {
+            laryer.alert("Connection error");
+        },
+        success: function (data) {
+            if (data.code == 0) {
+                parent.layer.msg("推送成功");
+            } else {
+                parent.layer.alert(data.msg)
+            }
+        }
+    });
 }
 
 function batchRemove() {

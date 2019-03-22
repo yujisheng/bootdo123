@@ -14,9 +14,8 @@
                     <div class="gg-nav">
 
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#basic_info" data-toggle="tab">苹果(ios)</a></li>
-                            <li><a href="#photo_info" data-toggle="tab">安卓(Android)</a></li>
-                            <!--<li><a href="#pwd_info" data-toggle="tab">修改密码</a></li>-->
+                            <li class="active"><a href="#basic_info" data-toggle="tab" id="ios_info">苹果(ios)</a></li>
+                            <li><a href="#basic_info" data-toggle="tab" id="android_info">安卓(Android)</a></li>
                         </ul>
 
                     </div>
@@ -25,11 +24,13 @@
                     <!--apple(ios) info-->
                     <div class="ibox-content tab-pane fade in active" id="basic_info">
 
-                        <form class="gg-form" role="form" id="basicInfoForm-ios">
+                        <form class="gg-form" role="form" id="basicInfoForm">
                             <div>
-                                <input type="hidden" name="platfrom" value="ios">
+                                <input type="hidden" name="type" value="ios" id="push_type">
                                 推送主题：<input type="text" name="title" value=""><br/>
-                                推送消磁：<input type="text" name="message" value="">
+                                推送消息：<input type="text" name="messageConetent" value=""><br/>
+                                额外功能key：<input type="text" name="extraKey" value=""><br/>
+                                额外功能value：<input type="text" name="extraValue" value="">
                             </div>
                             <div class="gg-formGroup">
                                 <div class="gg-formTitle">
@@ -42,25 +43,34 @@
                                             <div class="gg-nav">
                                                 <ul class="nav nav-tabs">
                                                     <li class="active">
-                                                        <a href="#push_all" data-toggle="tab">广播(所有人)</a>
+                                                        <a href="#push_all" data-toggle="tab" id="push_all_1"
+                                                           name="targetType">广播
+                                                            (所有人)</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#push_tag" data-toggle="tab">设备标签(tag)</a>
+                                                        <a href="#push_tag" data-toggle="tab" id="push_all_2"
+                                                           name="targetType">设备标签
+                                                            (tag)</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#push_alias" data-toggle="tab">设备别名(alias)</a>
+                                                        <a href="#push_alias" data-toggle="tab" id="push_all_3"
+                                                           name="targetType">设备别名
+                                                            (alias)</a>
                                                     </li>
                                                 </ul>
+                                            </div>
+                                            <div>
+                                                <input type="hidden" name="targetType" value="" id="tag_alias">
                                             </div>
                                             <div class="ibox-content tab-pane fade gg" id="push_all">
                                                 <!--<input type="text" style="width: 80px" name="" value="">-->
                                             </div>
                                             <div class="ibox-content tab-pane fade gg" id="push_tag">
-                                                <input type="text" style="width: 100%" name="tags" value="添加标签，中间用分号隔开">
+                                                <input type="text" style="width: 100%" name="tags" value="添加标签，中间用逗号隔开">
                                             </div>
                                             <div class="ibox-content tab-pane fade gg" id="push_alias">
                                                 <input type="text" style="width: 100%" name="alias"
-                                                       value="添加别名，中间用分号隔开">
+                                                       value="添加别名，中间用逗号隔开">
                                             </div>
                                         </label>
                                     </div>
@@ -77,69 +87,11 @@
                             </div>
                         </form>
                         <div class="gg-btnGroup">
-                            <button type="button" class="btn btn-sm btn-primary" id="base_save_ios">保存</button>
-                            <button type="button" class="btn btn-sm btn-primary" id="base_push_ios">立即发送</button>
+                            <button type="button" class="btn btn-sm btn-primary" id="base_save">保存</button>
+                            <button type="button" class="btn btn-sm btn-primary" id="base_push">立即发送</button>
                         </div>
                     </div>
 
-                    <!--android_info-->
-                    <div class="ibox-content tab-pane fade gg" id="photo_info">
-                        <form class="gg-form" role="form" id="basicInfoForm-android">
-                            <div>
-                                <input type="hidden" name="platfrom" value="android">
-                                推送主题：<input type="text" name="title" value=""><br/>
-                                推送消磁：<input type="text" name="message" value="">
-                            </div>
-                            <div class="gg-formGroup">
-                                <div class="gg-formTitle">
-                                    <em class="gg-star"></em>
-                                    <span>目标人群:</span>
-                                </div>
-                                <div class="gg-formDetail">
-                                    <div class="radio i-checks">
-                                        <label class="radio-inline">
-                                            <div class="gg-nav">
-                                                <ul class="nav nav-tabs">
-                                                    <li class="active">
-                                                        <a href="#push_all1" data-toggle="tab">广播(所有人)</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#push_tag1" data-toggle="tab">设备标签(tag)</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#push_alias1" data-toggle="tab">设备别名(alias)</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="ibox-content tab-pane fade gg" id="push_all1">
-                                                <!--<input type="text" style="width: 80px" name="" value="">-->
-                                            </div>
-                                            <div class="ibox-content tab-pane fade gg" id="push_tag1">
-                                                <input type="text" style="width: 100%" name="tags" value="添加标签，中间用分号隔开">
-                                            </div>
-                                            <div class="ibox-content tab-pane fade gg" id="push_alias1">
-                                                <input type="text" style="width: 100%" name="alias"
-                                                       value="添加别名，中间用分号隔开">
-                                            </div>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="gg-formGroup">
-                                <div class="gg-formTitle">
-                                    <em class="gg-star"></em>
-                                    <span>消息推送:</span>
-                                </div>
-                                <div class="gg-formDetail">
-                                    <textarea rows="5" cols="80" name="alter"></textarea>
-                                </div>
-                            </div>
-                        </form>
-                        <div class="gg-btnGroup">
-                            <button type="button" class="btn btn-sm btn-primary" id="base_save_android">保存</button>
-                            <button type="button" class="btn btn-sm btn-primary" id="base_push_android">立即发送</button>
-                        </div>
-                    </div>
                 </div>
 
             </div>

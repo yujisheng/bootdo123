@@ -6,18 +6,17 @@ import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
 import com.soft863.framework.PushMessage;
-import com.soft863.framework.PushMessageConfig.AllMessage;
-import com.soft863.framework.PushMessageConfig.AndroidMessage;
-import com.soft863.framework.PushMessageConfig.IosMessage;
 import com.soft863.framework.push.domain.PushDO;
+import com.soft863.framework.push.domain.PushVO;
 import com.soft863.framework.push.service.PushService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +31,9 @@ import java.util.Map;
 public class PushController {
     @Autowired
     private PushService pushService;
+
+    @Autowired
+    RestTemplate restTemplate;
 
     @GetMapping("/")
 //    @RequiresPermissions("system:push:push")
@@ -83,9 +85,16 @@ public class PushController {
     @ResponseBody
     @PostMapping("/save")
 //    @RequiresPermissions("system:push:add")
-    public R save(PushDO push) {
-        System.out.println("================" + push + "==================");
-        if (pushService.save(push) > 0) {
+    public R save(PushVO pushVO) {
+        PushDO pushDO1 = new PushDO();
+        pushDO1.setAlter(pushVO.getMessage());
+        pushDO1.setStatus(0L);
+        pushDO1.setAudience(pushVO.getTargetType());
+        pushDO1.setMessage(pushVO.getMessageConetent());
+        pushDO1.setTitle(pushVO.getTitle());
+        pushDO1.setPlatfrom(pushVO.getType());
+        System.out.println("================" + pushVO + "==================");
+        if (pushService.save(pushDO1) > 0) {
             return R.ok();
         }
         return R.error();
@@ -97,8 +106,15 @@ public class PushController {
     @ResponseBody
     @RequestMapping("/update")
 //    @RequiresPermissions("system:push:edit")
-    public R update(PushDO push) {
-        pushService.update(push);
+    public R update(PushVO pushVO) {
+        PushDO pushDO1 = new PushDO();
+        pushDO1.setAlter(pushVO.getMessage());
+        pushDO1.setStatus(1L);
+        pushDO1.setAudience(pushVO.getTargetType());
+        pushDO1.setMessage(pushVO.getMessageConetent());
+        pushDO1.setTitle(pushVO.getTitle());
+        pushDO1.setPlatfrom(pushVO.getType());
+        pushService.update(pushDO1);
         return R.ok();
     }
 
@@ -129,21 +145,37 @@ public class PushController {
     @Autowired
     private PushMessage pushMessage;
 
-    @RequestMapping("/pushMessageToAndroidAll")
+   /* @RequestMapping("/pushMessage")
     @ResponseBody
-    public R pushMessageToAndroidAll(PushDO pushDO) throws APIConnectionException, APIRequestException {
-        pushService.save(pushDO);
-        Map<String, String> extras = new HashMap<String, String>();
-        extras.put("extraKey", "ectraValue");
-        AndroidMessage androidMessage = new AndroidMessage(pushDO.getAlter(), pushDO.getTitle(), pushDO.getMessage(), extras);
-        // 测试
-        int i = pushMessage.pushMessageToAndroidAll(androidMessage);
-        if (i > 0) {
-            return R.ok();
-        }
-        return R.error();
-    }
+    public R pushMessage(PushVO pushVO,Integer pushId) throws APIConnectionException, APIRequestException {
+        System.out.println("=========="+pushVO+"=========="+pushId+"=============");
+        PushDO pushDO = pushService.get(pushId);
+        //if (PushUtil.PLATFROM_ANDROID.equals(pushVO.getType()) && PushUtil.TARGET_ALL.equals(pushVO.getTargetType())){
+            if(pushDO != null){
+                pushDO.setStatus(1L);
+                pushService.update(pushDO);
+            }else{
+                PushDO pushDO1 = new PushDO();
+                pushDO1.setAlter(pushVO.getMessage());
+                pushDO1.setStatus(1L);
+                pushDO1.setAudience(pushVO.getTargetType());
+                pushDO1.setMessage(pushVO.getMessageConetent());
+                pushDO1.setTitle(pushVO.getTitle());
+                pushDO1.setPlatfrom(pushVO.getType());
+                pushService.save(pushDO1);
+            }
+            return push(pushVO.getMessage(), pushVO.getTitle(), pushVO.getMessageConetent(), pushVO.getExtraValue());
+    }*/
 
+
+    @RequestMapping("/pushMessage")
+    @ResponseBody
+    public R pushMessageToAndroidAll(PushVO pushVO) throws APIConnectionException, APIRequestException {
+        System.out.println("==============" + pushVO);
+        return push(pushVO.getMessage(), pushVO.getTitle(), pushVO.getMessageConetent(), pushVO.getExtraValue(),
+                pushVO.getTargetType(), pushVO.getTargetArray(), pushVO.getExtraKey());
+    }
+/*
     @RequestMapping("/pushMessageToAndroidByTag")
     @ResponseBody
     public R pushMessageToAndroidByTag() throws APIConnectionException, APIRequestException {
@@ -219,6 +251,52 @@ public class PushController {
             return R.ok();
         }
         return R.error();
+    }*/
+
+    public R push(String alter, String title, String msgContent, String extraValue, String targetType,
+                  String targetArray, String extraKey) {
+        String host = "http://192.168.1.66:10081";
+        R result = null;
+        ResponseEntity<R> ret = null;
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+        headers.add("x-requested-with", "XMLHttpRequest");
+        HttpEntity<String> entity = new HttpEntity<String>(headers);
+        ret = restTemplate.exchange(host + "/api/login?username=admin&password=123456",
+                HttpMethod.POST,
+                entity, R.class);
+        if (ret != null) {
+            System.out.println(ret.getBody());
+            result = ret.getBody();
+            if (Integer.parseInt(result.get("code").toString()) == 0) {
+                String authorization = result.get("Authorization").toString();
+                System.out.println(authorization);
+
+                LinkedMultiValueMap body = new LinkedMultiValueMap();
+                //alter=测试33851&msgContent=消息内容&title=消息标题&extraValue=extraValue
+                body.add("deviceType", "Android");
+                body.add("alter", alter);
+                body.add("msgContent", msgContent);
+                body.add("title", title);
+                body.add("targetType", targetType);
+                body.add("targetArray", targetArray);
+                body.add("extraValue", extraKey);
+                body.add("extraValue", extraValue);
+
+
+                headers = new HttpHeaders();
+                headers.add("x-requested-with", "XMLHttpRequest");
+                headers.add("Authorization", authorization);
+                entity = new HttpEntity(body, headers);
+                ret = restTemplate.exchange(host + "/api/plugin/push",
+                        HttpMethod.POST,
+                        entity, R.class);
+                return ret.getBody();
+            }
+
+        }
+        return R.error();
+
     }
 
 
